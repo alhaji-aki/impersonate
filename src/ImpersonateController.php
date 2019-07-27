@@ -2,7 +2,6 @@
 
 namespace Bpocallaghan\Impersonate;
 
-use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -11,12 +10,12 @@ class ImpersonateController extends Controller
     /**
      * Impersonate the given user
      * @param Request $request
-     * @param User    $user
+     * @param config('auth.providers.users.model')    $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function login(Request $request, User $user)
+    protected function login(Request $request, $user)
     {
-        impersonate()->login($user);
+        impersonate()->login(findItemToImpersonate($user));
 
         // if redirect url in request
         if ($request->has('redirect_to')) {

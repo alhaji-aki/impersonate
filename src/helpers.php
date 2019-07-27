@@ -17,4 +17,9 @@ if (!function_exists('impersonate')) {
 
         return $impersonate;
     }
+
+    function findItemToImpersonate($user)
+    {
+        return config('impersonate.model')::where(config('impersonate.find_by'), $user)->firstOrFail();
+    }
 }
