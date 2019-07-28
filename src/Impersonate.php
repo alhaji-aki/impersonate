@@ -25,9 +25,6 @@ class Impersonate
      */
     public function login($user)
     {
-        // get the user to impersonate
-        $user = findItemToImpersonate($user);
-
         // if not impersonated, save current logged in user
         // otherwise do not update (leave first original user in session)
         if (!$this->isActive()) {

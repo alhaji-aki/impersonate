@@ -17,9 +17,19 @@ if (!function_exists('impersonate')) {
 
         return $impersonate;
     }
+}
 
+if (!function_exists('findItemToImpersonate')) {
+    /**
+     * Find the model to impersonate
+     * @param $user
+     * @return $user | \Exception
+     */
     function findItemToImpersonate($user)
     {
+        if ($user instanceof user) {
+            return $user;
+        }
         return config('impersonate.model')::where(config('impersonate.find_by'), $user)->firstOrFail();
     }
 }
